@@ -1,0 +1,22 @@
+name: Update Proxy List
+
+on:
+  schedule:
+    - cron: '0 * * * *' # يتم التحديث تلقائياً كل ساعة
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch and update proxies
+        run: |
+          curl -s "https://proxy-daily.com/api/export_proxies_ip_port?protocol=https" > all.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add all.txt
+          git commit -m "Auto-update proxy list" || exit 0
+          git push
