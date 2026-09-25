@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch and update proxies
         run: |
-curl -s "https://proxylist.geonode.com/api/proxy-list?page=1&limit=500&sort_by=responseTime&sort_type=asc" | jq -r '.data[] | "\(.ip):\(.port)"' > all.txt
+curl -s "https://proxylist.geonode.com/api/proxy-list?page=1&limit=500&sort_by=responseTime&sort_type=asc' | jq -r '.data[] | "\(.ip):\(.port)"' > all.txt
 curl -s "https://proxy-daily.com/api/export_proxies_ip_port?protocol=https" >> all.txt
 curl -s "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt" >> all.txt
 curl -s "https://proxy.webshare.io/api/v2/proxy/list/download/elemhvsjndkyaynxccapmgssiksxvwfqunvzjzro/-/any/username/direct/-/?plan_id=14393932" >> all.txt
